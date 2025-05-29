@@ -5,15 +5,11 @@ on:
     branches:
       - main
   schedule:
-      - cron: '*/10 * * * *'
+      - cron: '*/5 * * * *'
   workflow_dispatch: 
 
 permissions:
   contents: write 
-
-env:
-  GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-  GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
 
 jobs:
   bitcoin-price:
@@ -26,8 +22,8 @@ jobs:
 
       - name: Configure Git identity
         run: |
-          git config user.email "$GIT_USER_EMAIL"
-          git config user.name "$GIT_USER_NAME"
+          git config user.email "${{ secrets.GIT_USER_EMAIL }}"
+          git config user.name "${{ secrets.GIT_USER_NAME }}"
 
       - name: Fetch and merge latest changes
         run: |
